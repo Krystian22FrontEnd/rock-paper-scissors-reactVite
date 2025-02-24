@@ -1,40 +1,28 @@
 export const Game = () => {
   console.log("Hello World!");
+  console.log("Hello World!");
 
   let computerScore = 0;
   let humanScore = 0;
 
-  function getComputerChoice(max: number) {
-    const math = Math.floor(Math.random() * Number(max)) + 1;
-    const rock = "rock";
-    const paper = "paper";
-    const scissors = "scissors";
+  function getComputerChoice(): string {
+    const math = Math.random();
 
-    if (math === 1) {
-      return (
-        console.log(`Computer's choice %c${rock}`, "font-weight: bold"), rock
-      );
-    } else if (math === 2) {
-      return (
-        console.log(`Computer's choice %c${paper}`, "font-weight: bold"), paper
-      );
-    } else if (math === 3) {
-      return (
-        console.log(`Computer's choice %c${scissors}`, "font-weight: bold"),
-        scissors
-      );
+    if (math >= 0 && math < 1 / 3) {
+      return "rock";
+    } else if (math >= 1 / 3 && math < 2 / 3) {
+      return "paper";
+    } else if (math >= 2 / 3 && math < 1) {
+      return "scissors";
     }
+    return ""
   }
 
   function getWinner() {
-    let winner = "";
-
     if (humanScore === 5) {
-      let humanScore = "Player";
-      return alert(`The winner is ${(winner += humanScore)}!!!`);
+      return alert(`The winner is Player!!!`);
     } else if (computerScore === 5) {
-      let computerScore = "Computer";
-      return alert(`The winner is ${(winner += computerScore)}!!!`);
+      return alert(`The winner is Computer!!!`);
     }
   }
 
@@ -48,26 +36,32 @@ export const Game = () => {
         computerPoints instanceof HTMLElement
       ) {
         if (humanChoice === "rock" && computerChoice === "scissors") {
-          return (playerPoints.innerText = String(++humanScore));
+          return console.log((playerPoints.innerText = String(++humanScore)));
         } else if (humanChoice === "rock" && computerChoice === "rock") {
           return console.log("Tie!");
         } else if (humanChoice === "rock" && computerChoice === "paper") {
-          return (computerPoints.innerText = String(++computerScore));
+          return console.log(
+            (computerPoints.innerText = String(++computerScore))
+          );
         } else if (humanChoice === "paper" && computerChoice === "rock") {
-          return (playerPoints.innerText = String(++humanScore));
+          return console.log((playerPoints.innerText = String(++humanScore)));
         } else if (humanChoice === "paper" && computerChoice === "paper") {
           return console.log("Tie!");
         } else if (humanChoice === "paper" && computerChoice === "scissors") {
-          return (computerPoints.innerText = String(++computerScore));
+          return console.log(
+            (computerPoints.innerText = String(++computerScore))
+          );
         } else if (humanChoice === "scissors" && computerChoice === "paper") {
-          return (playerPoints.innerText = String(++humanScore));
+          return console.log((playerPoints.innerText = String(++humanScore)));
         } else if (
           humanChoice === "scissors" &&
           computerChoice === "scissors"
         ) {
           return console.log("Tie!");
         } else if (humanChoice === "scissors" && computerChoice === "rock") {
-          return (computerPoints.innerText = String(++computerScore));
+          return console.log(
+            (computerPoints.innerText = String(++computerScore))
+          );
         }
       }
     }
@@ -76,7 +70,7 @@ export const Game = () => {
     btn.forEach((btn) => {
       btn.addEventListener("click", () => {
         const humanChoice = btn.innerText.toLowerCase();
-        playRound(humanChoice, getComputerChoice(3)!);
+        playRound(humanChoice, getComputerChoice());
         getWinner();
       });
     });
