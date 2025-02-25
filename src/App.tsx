@@ -1,5 +1,5 @@
 import { Container } from "./Container/styled";
-import { Game } from "./script";
+import { Game } from "./Game/script";
 
 function App() {
   return (
