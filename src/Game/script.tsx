@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getComputerChoice } from "../getComputerChoice";
+import { getComputerChoice } from "./getComputerChoice";
+import { Button, ButtonWrapper, Wrapper } from "./styled";
 
 export const Game = () => {
   const [computerChoice, setComputerChoice] = useState<string>("");
@@ -35,25 +36,27 @@ export const Game = () => {
 
   return (
     <>
-      <div>
-        <button onClick={() => playRound("rock")}>Rock</button>
-        <button onClick={() => playRound("paper")}>Paper</button>
-        <button onClick={() => playRound("scissors")}>Scissors</button>
-      </div>
-      <div>
+      <Wrapper>
         <h2>Results</h2>
         <p>Player Points: {playerScore}</p>
         <p>Computer Points: {computerScore}</p>
         <p>Computer Choice: {computerChoice}</p>
-        <button
+      </Wrapper>
+      <ButtonWrapper>
+        <Button onClick={() => playRound("rock")}>Rock</Button>
+        <Button onClick={() => playRound("paper")}>Paper</Button>
+        <Button onClick={() => playRound("scissors")}>Scissors</Button>
+      </ButtonWrapper>
+<ButtonWrapper>
+<Button
           onClick={() => {
             setPlayerScore(0);
             setComputerScore(0);
           }}
         >
           Play Again
-        </button>
-      </div>
+        </Button>
+</ButtonWrapper>
     </>
   );
 };
