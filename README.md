@@ -2,4 +2,9 @@
 
 ## Really simple and fun to play game.
 
-###  For now only avalaible to play in console.log!
+###  Now ready to be played!
+
+#### Things to add in near future:
+- Proper styling,
+- Displaying a winner as another component
+- improving overall experience
