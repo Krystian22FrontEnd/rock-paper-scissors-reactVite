@@ -12,7 +12,7 @@ import {
 
 export const Game = () => {
   const [humanChoice, setHumanChoice] = useState<string>("");
-  const [computerChoice, setComputerChoice] = useState<string>("");
+  const [computerChoice, setComputerChoice] = useState<string>("waiting");
   const [playerScore, setPlayerScore] = useState<number>(0);
   const [computerScore, setComputerScore] = useState<number>(0);
   const [playerWins, setPlayerWins] = useState<number>(0);
@@ -83,7 +83,9 @@ export const Game = () => {
         <p>Computer Points: {computerScore}</p>
         <p>Computer Choice: {computerChoice}</p>
       </Wrapper>
-      <TieParagraph>{humanChoice === computerChoice ? "Tie" : ""}</TieParagraph>
+      <TieParagraph>
+        {humanChoice === computerChoice ? "Tie" : ""}
+      </TieParagraph>
       <ButtonWrapper>
         <Button onClick={() => playRound("rock")}>Rock</Button>
         <Button onClick={() => playRound("paper")}>Paper</Button>
