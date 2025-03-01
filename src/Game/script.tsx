@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { getComputerChoice } from "./getComputerChoice";
 import {
   BigButton,
-  BigWrapper,
   Button,
   ButtonWrapper,
   Header,
+  Points,
   PointsParagraph,
   ResultsWrapper,
-  Span,
+  SpanScore,
   TieParagraph,
   Wrapper,
 } from "./styled";
@@ -20,7 +20,7 @@ export const Game = () => {
   const [computerChoice, setComputerChoice] = useState<string>("waiting");
   const [playerScore, setPlayerScore] = useState<number>(0);
   const [computerScore, setComputerScore] = useState<number>(0);
-  const [playerWins, setPlayerWins] = useState<number>(2);
+  const [playerWins, setPlayerWins] = useState<number>(0);
   const [computerWins, setComputerWins] = useState<number>(0);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export const Game = () => {
   };
 
   return (
-    <BigWrapper>
+    <>
       {playerWins === 3 ? (
         <WinnerScreen />
       ) : computerWins === 3 ? (
@@ -83,15 +83,20 @@ export const Game = () => {
         <>
           <Header>Results:</Header>
           <ResultsWrapper>
-            <Span> Player</Span>
-            <Span>{playerWins}</Span> <Span>:</Span> <Span>{computerWins}</Span>
-            <Span> CPU</Span>
+            Player
+            <SpanScore>{playerWins}</SpanScore>:
+            <SpanScore>{computerWins}</SpanScore>
+            CPU
           </ResultsWrapper>
           <Wrapper>
-            <PointsParagraph>Player Points: {playerScore}</PointsParagraph>
-            <PointsParagraph>Computer Points: {computerScore}</PointsParagraph>
-            <PointsParagraph>Computer Choice: {computerChoice}</PointsParagraph>
+            <Points>
+              Player Points:<SpanScore> {playerScore}</SpanScore>
+            </Points>
+            <Points>
+              Computer Points: <SpanScore>{computerScore}</SpanScore>
+            </Points>
           </Wrapper>
+          <PointsParagraph>Computer Choice: {computerChoice}</PointsParagraph>
           <TieParagraph>
             {humanChoice === computerChoice ? "Tie" : ""}
           </TieParagraph>
@@ -112,6 +117,6 @@ export const Game = () => {
           Play Again
         </BigButton>
       </ButtonWrapper>
-    </BigWrapper>
+    </>
   );
 };
