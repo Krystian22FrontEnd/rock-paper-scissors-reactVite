@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import { getComputerChoice } from "./getComputerChoice";
 import {
+  BigButton,
   Button,
   ButtonWrapper,
   Header,
+  Points,
+  PointsParagraph,
   ResultsWrapper,
-  Span,
+  SpanScore,
   TieParagraph,
   Wrapper,
 } from "./styled";
+import { WinnerScreen } from "../WinnerScreen";
+import { LoserScreen } from "../LoserScreen";
 
 export const Game = () => {
   const [humanChoice, setHumanChoice] = useState<string>("");
@@ -20,9 +25,9 @@ export const Game = () => {
 
   useEffect(() => {
     if (playerWins === 3) {
-      alert("GAME WON BY PLAYER!");
+      return;
     } else if (computerWins === 3) {
-      alert("GAME WON BY CPU!");
+      return;
     }
   }, [playerWins, computerWins]);
 
@@ -61,7 +66,6 @@ export const Game = () => {
   const resetRound = () => {
     setPlayerScore(0);
     setComputerScore(0);
-    setComputerChoice("");
   };
 
   const resetGame = () => {
@@ -71,35 +75,47 @@ export const Game = () => {
 
   return (
     <>
-      <Header>Results:</Header>
-      <ResultsWrapper>
-        <p>
-          Player {playerWins}:{computerWins}
-          <Span>CPU</Span>
-        </p>
-      </ResultsWrapper>
-      <Wrapper>
-        <p>Player Points: {playerScore}</p>
-        <p>Computer Points: {computerScore}</p>
-        <p>Computer Choice: {computerChoice}</p>
-      </Wrapper>
-      <TieParagraph>
-        {humanChoice === computerChoice ? "Tie" : ""}
-      </TieParagraph>
+      {playerWins === 3 ? (
+        <WinnerScreen />
+      ) : computerWins === 3 ? (
+        <LoserScreen />
+      ) : (
+        <>
+          <Header>Results:</Header>
+          <ResultsWrapper>
+            Player
+            <SpanScore>{playerWins}</SpanScore>:
+            <SpanScore>{computerWins}</SpanScore>
+            CPU
+          </ResultsWrapper>
+          <Wrapper>
+            <Points>
+              Player Points:<SpanScore> {playerScore}</SpanScore>
+            </Points>
+            <Points>
+              Computer Points: <SpanScore>{computerScore}</SpanScore>
+            </Points>
+          </Wrapper>
+          <PointsParagraph>Computer Choice: {computerChoice}</PointsParagraph>
+          <TieParagraph>
+            {humanChoice === computerChoice ? "Tie" : ""}
+          </TieParagraph>
+          <ButtonWrapper>
+            <Button onClick={() => playRound("rock")}>Rock</Button>
+            <Button onClick={() => playRound("paper")}>Paper</Button>
+            <Button onClick={() => playRound("scissors")}>Scissors</Button>
+          </ButtonWrapper>
+        </>
+      )}
       <ButtonWrapper>
-        <Button onClick={() => playRound("rock")}>Rock</Button>
-        <Button onClick={() => playRound("paper")}>Paper</Button>
-        <Button onClick={() => playRound("scissors")}>Scissors</Button>
-      </ButtonWrapper>
-      <ButtonWrapper>
-        <Button
+        <BigButton
           onClick={() => {
             resetRound();
             resetGame();
           }}
         >
           Play Again
-        </Button>
+        </BigButton>
       </ButtonWrapper>
     </>
   );

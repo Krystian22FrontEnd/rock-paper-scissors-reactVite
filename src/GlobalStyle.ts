@@ -11,5 +11,6 @@ html {
 
 body {
   font-family: "Lato", sans-serif;
+background-color: ${({theme}) => theme.color.black}
 }
 `;
